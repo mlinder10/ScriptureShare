@@ -4,6 +4,7 @@ import Chapter from "@/models/Chapter";
 import client from "@/config/db";
 import User from "@/models/User";
 import Bible from "@/models/Bible";
+import { parseContent } from "@/config/constants";
 
 export async function GET(request: NextRequest) {
   const type = request.nextUrl.searchParams.get("type");
@@ -132,16 +133,6 @@ async function fetchBible(user: User, bibleId: string) {
 
   let data = (await res.json()).data;
   return data;
-}
-
-export function parseContent(content: string) {
-  let index = 1;
-  return content.split("\n").map((paragraph) =>
-    paragraph
-      .split(/\[\d{1,2}\]/)
-      .slice(1)
-      .map((verse) => `[${index++}]${verse.replace("     ", "")}`)
-  );
 }
 
 async function updateChapter(user: User, chapterData: any, bibleData: any) {

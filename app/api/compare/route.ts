@@ -1,6 +1,6 @@
 import { bibleRootUrl } from "@/config/constants";
 import { NextRequest, NextResponse } from "next/server";
-import { parseContent } from "../read/route";
+import { parseContent } from "@/config/constants";
 
 export async function GET(request: NextRequest) {
   const topBibleId = request.headers.get("topBibleId");

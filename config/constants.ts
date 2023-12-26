@@ -62,3 +62,13 @@ export function createDefaultUser(
     defaultChapter
   );
 }
+
+export function parseContent(content: string) {
+  let index = 1;
+  return content.split("\n").map((paragraph) =>
+    paragraph
+      .split(/\[\d{1,2}\]/)
+      .slice(1)
+      .map((verse) => `[${index++}]${verse.replace("     ", "")}`)
+  );
+}

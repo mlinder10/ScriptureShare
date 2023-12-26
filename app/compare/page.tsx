@@ -132,22 +132,22 @@ function BibleSelectModal({
       <button onClick={close}>Close</button>
       <div>
         {bibles.map((bible) => (
-          <div>{bible.abbreviationLocal}</div>
+          <div key={bible.id}>{bible.abbreviationLocal}</div>
         ))}
       </div>
       <div>
         {bibles.map((bible) => (
-          <div>{bible.abbreviationLocal}</div>
+          <div key={bible.id}>{bible.abbreviationLocal}</div>
         ))}
       </div>
       <div>
         {books.map((book) => (
-          <div>{book.name}</div>
+          <div key={book.id}>{book.name}</div>
         ))}
       </div>
       <div>
         {chapters.map((chapter) => (
-          <div>{chapter.number}</div>
+          <div key={chapter.id}>{chapter.number}</div>
         ))}
       </div>
     </div>

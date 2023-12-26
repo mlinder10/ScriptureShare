@@ -1,0 +1,14 @@
+.main {
+  padding-inline: 4em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.textarea {
+  resize: none;
+  width: 100%;
+  padding: 0.5em;
+  border: none;
+  font-size: 1rem;
+}

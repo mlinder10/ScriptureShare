@@ -1,11 +1,13 @@
 "use client";
+import { AuthContext } from "@/contexts/AuthContext";
 import User from "@/models/User";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useContext(AuthContext)
 
   return (
     <main>
@@ -21,7 +23,7 @@ export default function Login() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={() => User.login(email, password)}>Login</button>
+      <button onClick={() => login(email, password)}>Login</button>
       <Link href="/auth/register">Register</Link>
     </main>
   );

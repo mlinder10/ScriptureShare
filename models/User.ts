@@ -10,7 +10,7 @@ export default class User {
     public uid: string,
     public name: string,
     public email: string,
-    private password: string,
+    public password: string,
     public followers: string[],
     public following: string[],
     public bible: Bible,

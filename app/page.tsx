@@ -164,34 +164,49 @@ function BibleSelectModal({ isOpen, close, fetchChapter }: BibleSelectModal) {
 
   return (
     <div className={`${styles.modal} ${isOpen ? styles.open : ""}`}>
-      <button onClick={close}>Close</button>
+      <div className={styles["close-container"]}>
+        <button className={styles["close-btn"]} onClick={close}>
+          Close
+        </button>
+      </div>
       <div className={styles["modal-content"]}>
         <div className={styles["modal-bibles"]}>
+          <h2>Bibles</h2>
           {bibles.map((bible) => (
             <div
               key={bible.id}
               onClick={() => fetchChapter(bible.id, undefined)}
             >
-              {bible.nameLocal}
+              <p className={styles["modal-name-primary"]}>
+                {bible.abbreviationLocal}
+              </p>
+              <p className={styles["modal-name-secondary"]}>
+                {bible.nameLocal}
+              </p>
             </div>
           ))}
         </div>
         <div className={styles["modal-books"]}>
+          <h2>Books</h2>
           {books.map((book) => (
             <div key={book.id} onClick={() => setSelectedBook(book)}>
-              {book.name}
+              <p className={styles["modal-name-primary"]}>{book.name}</p>
+              <p className={styles["modal-name-secondary"]}>{book.nameLong}</p>
             </div>
           ))}
         </div>
         <div className={styles["modal-chapters"]}>
-          {chapters.map((chapter) => (
-            <div
-              key={chapter.id}
-              onClick={() => fetchChapter(undefined, chapter.id)}
-            >
-              {chapter.number}
-            </div>
-          ))}
+          <h2>Chapters</h2>
+          <div>
+            {chapters.map((chapter) => (
+              <div
+                key={chapter.id}
+                onClick={() => fetchChapter(undefined, chapter.id)}
+              >
+                {chapter.number}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

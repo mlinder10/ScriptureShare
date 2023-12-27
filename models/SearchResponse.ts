@@ -7,14 +7,6 @@ type SearchVerses = {
   reference: string;
 };
 
-type Passage = {
-  id: string;
-  bibleId: string;
-  content: string;
-  reference: string;
-  verseCount: number;
-};
-
 export default class SearchResponse {
   query: string;
   limit: number;
@@ -22,7 +14,6 @@ export default class SearchResponse {
   total: number;
   verseCount: number;
   verses: SearchVerses[];
-  passages: Passage[];
 
   constructor(
     query: string,
@@ -31,7 +22,6 @@ export default class SearchResponse {
     total: number,
     verseCount: number,
     verses: SearchVerses[],
-    passages: Passage[]
   ) {
     this.query = query;
     this.limit = limit;
@@ -39,7 +29,6 @@ export default class SearchResponse {
     this.total = total;
     this.verseCount = verseCount;
     this.verses = verses;
-    this.passages = passages;
   }
 
   static fromJsonString(jsonString: string): SearchResponse {
@@ -51,7 +40,6 @@ export default class SearchResponse {
       json.total,
       json.verseCount,
       json.verses,
-      json.passages
     );
   }
 }

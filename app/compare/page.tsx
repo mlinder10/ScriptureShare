@@ -10,32 +10,32 @@ import Book from "@/models/Book";
 
 export default function Compare() {
   const { user } = useContext(AuthContext);
-  const [topBible, setTopBible] = useState<Bible>(user?.bible ?? defaultBible);
-  const [bottomBible, setBottomBible] = useState(defaultBible);
+  const [leftBible, setLeftBible] = useState<Bible>(user?.bible ?? defaultBible);
+  const [rightBible, setRightBible] = useState(defaultBible);
   const [chapter, setChapter] = useState(user?.chapter ?? defaultChapter);
-  const [topContent, setTopContent] = useState<string[][]>([]);
-  const [bottomContent, setBottomContent] = useState<string[][]>([]);
+  const [leftContent, setLeftContent] = useState<string[][]>([]);
+  const [rightContent, setRightContent] = useState<string[][]>([]);
 
   useEffect(() => {
     async function fetchContent() {
       try {
         const res = await fetch("/api/compare", {
           headers: {
-            topBibleId: topBible.id,
-            bottomBibleId: bottomBible.id,
+            leftBibleId: leftBible.id,
+            rightBibleId: rightBible.id,
             chapterId: chapter.id,
           },
         });
         const data = await res.json();
-        setTopContent(data.top.content);
-        setBottomContent(data.bottom.content);
+        setLeftContent(data.left.content);
+        setRightContent(data.right.content);
         console.log(data);
       } catch (err: any) {
         console.error(err?.message);
       }
     }
     fetchContent();
-  }, [topBible, chapter, bottomBible]);
+  }, [leftBible, chapter, rightBible]);
 
   return (
     <main className={styles.main}>
@@ -45,14 +45,13 @@ export default function Compare() {
         <button>Chapter</button>
       </div>
       <div className={styles["content-container"]}>
-        <Content content={topContent} selected={[]} handleSelect={() => {}} />
+        <Content content={leftContent} selected={[]} handleSelect={() => {}} />
         <Content
-          content={bottomContent}
+          content={rightContent}
           selected={[]}
           handleSelect={() => {}}
         />
       </div>
-
     </main>
   );
 }

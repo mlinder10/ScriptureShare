@@ -3,11 +3,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { parseContent } from "@/config/constants";
 
 export async function GET(request: NextRequest) {
-  const topBibleId = request.headers.get("topBibleId");
-  const bottomBibleId = request.headers.get("bottomBibleId");
+  const leftBibleId = request.headers.get("leftBibleId");
+  const rightBibleId = request.headers.get("rightBibleId");
   const chapterId = request.headers.get("chapterId");
 
-  if (!topBibleId || !chapterId || !bottomBibleId) {
+  if (!leftBibleId || !chapterId || !rightBibleId) {
     return NextResponse.json(
       { message: "All parameters are required" },
       { status: 400 }
@@ -15,10 +15,10 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const topData = await fetchChapter(topBibleId, chapterId);
-    const bottomData = await fetchChapter(bottomBibleId, chapterId);
+    const leftData = await fetchChapter(leftBibleId, chapterId);
+    const rightData = await fetchChapter(rightBibleId, chapterId);
     return NextResponse.json(
-      { top: topData, bottom: bottomData },
+      { left: leftData, right: rightData },
       { status: 200 }
     );
   } catch (err: any) {

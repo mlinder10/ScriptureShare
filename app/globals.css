@@ -1,5 +1,6 @@
 :root {
   --background: #fff;
+  --background-secondary: #ddd;
   --primary: #000;
   --secondary: #222;
   --accent: #bca174;
@@ -8,6 +9,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #000;
+    --background-secondary: #222;
     --primary: #fff;
     --secondary: #ddd;
     --accent: #bca174;

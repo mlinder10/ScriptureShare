@@ -3,6 +3,8 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { useSearchParams } from "next/navigation";
 import { useContext, useState } from "react";
 import styles from "./page.module.css";
+import { VscArrowLeft, VscArrowSmallLeft, VscArrowUp } from "react-icons/vsc";
+import Link from "next/link";
 
 export default function Post() {
   const { user } = useContext(AuthContext);
@@ -35,6 +37,10 @@ export default function Post() {
 
   return (
     <main className={styles.main}>
+      <Link href="/" className={styles["back-btn"]}>
+        <VscArrowLeft />
+        <span>Back</span>
+      </Link>
       <h1>
         {user?.chapter.format()}: {start === end ? start : `${start}-${end}`}
       </h1>
@@ -46,7 +52,10 @@ export default function Post() {
         placeholder="Add note..."
         className={styles.textarea}
       />
-      <button onClick={post}>Post</button>
+      <button className={styles["post-btn"]} onClick={post}>
+        <VscArrowUp />
+        <span>Post</span>
+      </button>
     </main>
   );
 }

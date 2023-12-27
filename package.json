@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "ts-node test.ts"
   },
   "dependencies": {
     "@libsql/client": "^0.4.0-pre.5",
@@ -21,6 +22,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

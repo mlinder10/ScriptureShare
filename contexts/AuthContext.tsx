@@ -35,7 +35,7 @@ export default function AuthProvider({ children }: AuthContextProps) {
     const localUser =
       user ??
       User.construct(
-        JSON.parse(localStorage.getItem(User.LOCAL_USER_KEY) ?? "")
+        JSON.parse(localStorage.getItem(User.LOCAL_USER_KEY) ?? "null")
       );
     if (user === null) setUser(localUser)
 

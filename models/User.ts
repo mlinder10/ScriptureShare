@@ -18,7 +18,8 @@ export default class User {
     public chapter: Chapter
   ) {}
 
-  static construct(user: User): User {
+  static construct(user: User | null): User | null {
+    if (user === null) return null;
     return new User(
       user.uid,
       user.name,
@@ -72,6 +73,7 @@ export default class User {
     ) {
       return null;
     }
+
     return new User(
       row.uid,
       row.name,

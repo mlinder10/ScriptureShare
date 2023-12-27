@@ -57,8 +57,8 @@ export default class Chapter {
       json.content,
       json.reference,
       json.verseCount,
-      JSON.parse(json.next),
-      JSON.parse(json.previous)
+      json.next,
+      json.previous
     );
   }
 

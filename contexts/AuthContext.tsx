@@ -43,7 +43,7 @@ export default function AuthProvider({ children }: AuthContextProps) {
       router.replace("/");
     }
 
-    if (!pathname.includes("/auth") && !localUser) {
+    if (!pathname.includes("/auth") && localUser === null) {
       router.replace("/auth/login");
     }
   }, [pathname, user]);
@@ -57,11 +57,12 @@ export default function AuthProvider({ children }: AuthContextProps) {
     try {
       const res = await fetch("/api/auth", {
         headers: {
-          email: email,
-          password: password,
+          email,
+          password,
         },
       });
       const data = await res.json();
+      if (!res.ok) return
       setUser(User.construct(data));
       localStorage.setItem(User.LOCAL_USER_KEY, JSON.stringify(data));
     } catch (err: any) {
@@ -71,7 +72,7 @@ export default function AuthProvider({ children }: AuthContextProps) {
 
   async function register(name: string, email: string, password: string) {
     try {
-      const res = await fetch("/api/auth/register", {
+      const res = await fetch("/api/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -83,6 +84,7 @@ export default function AuthProvider({ children }: AuthContextProps) {
         }),
       });
       const data = await res.json();
+      console.log(data)
       setUser(User.construct(data));
       localStorage.setItem(User.LOCAL_USER_KEY, JSON.stringify(data));
     } catch (err: any) {

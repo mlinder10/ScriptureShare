@@ -7,20 +7,20 @@ export default class Note {
     public name: string,
     public verses: string[],
     public content: string,
-    public createdAt: string,
+    public createdAt: Date,
     public bibleId: string,
     public bookId: string,
     public chapterId: string
   ) {}
 
-  static construct(note: Note): Note {
+  static construct(note: any): Note {
     return new Note(
       note.pid,
       note.uid,
       note.name,
-      note.verses,
+      JSON.parse(note.verses),
       note.content,
-      note.createdAt,
+      new Date(note.createdAt),
       note.bibleId,
       note.bookId,
       note.chapterId

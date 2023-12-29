@@ -12,10 +12,10 @@ export async function POST(request: NextRequest) {
       user.name,
       verses,
       content,
-      new Date().toISOString(),
-      user.bibleId,
-      user.bookId,
-      user.chapterId
+      new Date(),
+      user.bible.id,
+      user.book.id,
+      user.chapter.id
     );
     await client.execute({
       sql: "insert into notes (pid, uid, name, verses, content, createdAt, bibleId, bookId, chapterId) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
         note.name,
         JSON.stringify(note.verses),
         note.content,
-        note.createdAt,
+        note.createdAt.toISOString(),
         note.bibleId,
         note.bookId,
         note.chapterId,

@@ -8,6 +8,7 @@ import Chapter from "@/models/Chapter";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 import { AuthContext } from "@/contexts/AuthContext";
+import { VscClose } from "react-icons/vsc";
 
 export default function Read() {
   const { user, update } = useContext(AuthContext);
@@ -32,6 +33,14 @@ export default function Read() {
     if (selected[0] > num) return setSelected([num, selected[1]]);
     if (selected[1] < num) return setSelected([selected[0], num]);
     if (selected[0] <= num && selected[1] >= num) return setSelected([]);
+  }
+
+  function last() {
+    fetchChapter(user?.bible.id, user?.chapter.previous.id);
+  }
+
+  function next() {
+    fetchChapter(user?.bible.id, user?.chapter.next.id);
   }
 
   return (
@@ -68,18 +77,10 @@ export default function Read() {
           handleSelect={handleSelect}
         />
         <div className={styles["footer-btns"]}>
-          <button
-            onClick={() =>
-              fetchChapter(user?.bible.id, user?.chapter.previous.id)
-            }
-          >
+          <button onClick={last}>
             <FaArrowLeft />
-            <span>Last</span>
           </button>
-          <button
-            onClick={() => fetchChapter(user?.bible.id, user?.chapter.next.id)}
-          >
-            <span>Next</span>
+          <button onClick={next}>
             <FaArrowRight />
           </button>
         </div>
@@ -166,7 +167,8 @@ function BibleSelectModal({ isOpen, close, fetchChapter }: BibleSelectModal) {
     <div className={`${styles.modal} ${isOpen ? styles.open : ""}`}>
       <div className={styles["close-container"]}>
         <button className={styles["close-btn"]} onClick={close}>
-          Close
+          <VscClose />
+          <span>Close</span>
         </button>
       </div>
       <div className={styles["modal-content"]}>
